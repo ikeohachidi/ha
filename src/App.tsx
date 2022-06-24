@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useQueryClient, useQuery } from 'react-query';
+import { ApiResponse, Character } from './types';
+
+import CharacterCard from './components/CharacterCard';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const API = 'https://rickandmortyapi.com/api/character';
+  const { data, isLoading, isError, error, isSuccess } = useQuery('characters', async (): Promise<ApiResponse<Character[]>> => {
+    const response = await fetch(API);
+    return response.json();
+  })
+
+  if (isLoading) {
+    return <p>Loading page please wait.</p>
+  }
+
+  if (isError && error) {
+    return <div>it seems an error occured</div>
+  }
+
+  if (isSuccess && data) {
+    return (
+      <div className="App">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          {
+            data.results.map((character, index) => {
+              return <CharacterCard character={character}/>
+            })
+          }
+        </ul>
+      </div>
+    );
+  }
+
+  return <p></p>
 }
 
 export default App;
