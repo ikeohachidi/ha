@@ -12,9 +12,10 @@ import ArrowTopRightIcon from 'icons/ArrowTopRightIcon';
 interface Props {
 	character: Character,
 	onEpisodeClick: (episodes: UrlString[]) => void;
+	onOriginClick: (origin: UrlString) => void;
 }
 
-const CharacterCard = ({ character, onEpisodeClick }: Props): JSX.Element => {
+const CharacterCard = ({ character, onOriginClick, onEpisodeClick }: Props): JSX.Element => {
 	return (
 		<Card>
 			<div>
@@ -25,26 +26,32 @@ const CharacterCard = ({ character, onEpisodeClick }: Props): JSX.Element => {
 					<h2>{ character.name }</h2>
 					<div className="quick-info">
 						<p>{ character.species }</p>
-						<p>
+						<div>
 							{
 								character.status === Status.ALIVE
 								? <Alive/>
 								: <Dead/>
 							}
 							{ character.status }
-						</p>
+						</div>
 					</div>
 				</Description>
 			</div>
 			<Metadata>
-				<h4>Last known location</h4>
-				<h3 className="info">{ character.location.name }</h3>
+				<h3>Origin</h3>
+				<h4 className="info">
+					{ character.origin.name }
+					<ArrowTopRightIcon onClick={ () => onOriginClick(character.origin.url) }/>
+				</h4>
+			
+				<h3>Last known location</h3>
+				<h4 className="info">{ character.location.name }</h4>
 
-				<h4>No of episode appearances</h4>
-				<h3 className="info">
+				<h3>No of episode appearances</h3>
+				<h4 className="info">
 					{ character.episode.length }
 					<ArrowTopRightIcon onClick={ () => onEpisodeClick(character.episode) }/>
-				</h3>
+				</h4>
 			</Metadata>
 		</Card>
 	)

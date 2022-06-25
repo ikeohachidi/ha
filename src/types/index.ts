@@ -53,3 +53,12 @@ export interface Episode {
 	url: string,
 	created: string
 }
+
+export interface Location {
+	name: string,
+	type: string,
+	dimension: string,
+	residents: UrlString[],
+	url: UrlString,
+	created: string
+}

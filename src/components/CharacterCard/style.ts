@@ -13,14 +13,6 @@ export const Card = styled.li`
 		margin: 0;
 	}
 
-	h4 {
-		color: var(--text-body);
-
-		:not(:first-of-type) {
-			margin-top: 20px;
-		}
-	}
-
 	> div:first-of-type {
 		position: relative;
 
@@ -58,7 +50,7 @@ export const Description = styled.div`
 		display: flex;
 		justify-content: space-between;
 
-		p {
+		> div {
 			display: flex;
 			align-items: center;
 		}
@@ -77,15 +69,18 @@ export const Metadata = styled.div`
 	transform: translateY(100%);
 	transition: .5s;
 
-	h4 {
+	h3 {
 		color: var(--text-body);
 	}
 
-	h3 {
+	h4 {
 		display: flex;
 		align-items: center;
+		margin-bottom: 13px;
+
 		i {
 			margin-left: 20px;
+			font-size: 12px;
 		}
 	}
 }

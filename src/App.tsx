@@ -3,8 +3,9 @@ import { useQuery } from 'react-query';
 import { ApiResponse, Character, UrlString } from './types';
 import { AppShell, CardsWrapper } from './App.style';
 
-import CharacterCard from './components/CharacterCard';
+import CharacterCard from 'components/CharacterCard';
 import EpisodesListing from 'components/EpisodesListing';
+import OriginListing from 'components/OriginListing';
 
 function App() {
   const CHARACTER_API = 'https://rickandmortyapi.com/api/character';
@@ -15,10 +16,17 @@ function App() {
 
   const [ showEpisodes, setShowEpisodes ] = useState(false);
   const [ characterEpisodes, setCharacterEpisodes ] = useState<UrlString[]>([]);
+  const [ showOrigin, setShowOrigin ] = useState(false)
+  const [ characterOrigin, setCharacterOrigin ] = useState<UrlString>('');
 
   const openEpisodesScreen = (episodes: UrlString[]) => {
     setShowEpisodes(true);
-    setCharacterEpisodes(episodes)
+    setCharacterEpisodes(episodes);
+  }
+
+  const openOriginScreen = (origin: UrlString) => {
+    setShowOrigin(true);
+    setCharacterOrigin(origin)
   }
 
   if (isLoading) {
@@ -38,6 +46,12 @@ function App() {
             onCloseIconClick={() => { setShowEpisodes(false) }}
           />
         }
+        {
+          showOrigin && <OriginListing
+            locationUrl={characterOrigin}
+            onCloseIconClick={() => { setShowOrigin(false) }}
+          />
+        }
         <CardsWrapper>
           {
             data.results.map((character, index) => (
@@ -45,6 +59,7 @@ function App() {
                 key={index}
                 character={character} 
                 onEpisodeClick={openEpisodesScreen}
+                onOriginClick={openOriginScreen}
               />
             ))
           }
