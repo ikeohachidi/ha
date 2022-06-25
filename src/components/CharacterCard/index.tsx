@@ -19,8 +19,7 @@ const CharacterCard = ({ character, onOriginClick, onEpisodeClick }: Props): JSX
 	return (
 		<Card>
 			<div>
-				{/*ADD REdirect to single page link here*/}
-				<img src={character.image} />
+				<img src={character.image} alt={character.name}/>
 
 				<Description>
 					<h2>{ character.name }</h2>

@@ -1,9 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { ApiResponse, Episode, UrlString, Location } from 'types';
-import { 
-    Info
-} from './style';
+import {UrlString, Location } from 'types';
+import { Info } from './style';
 
 import Overlay from 'components/Overlay';
 
