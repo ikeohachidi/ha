@@ -6,7 +6,6 @@ import {
 } from './style';
 
 import Overlay from 'components/Overlay';
-import CloseIcon from 'icons/CloseIcon';
 
 interface Props {
     episodes: UrlString[],
@@ -25,12 +24,6 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
         const response = await fetch(EPISODES_API);
         return response.json();
     })
-
-    if (isLoading) {
-        return (
-            <p>Please wait.</p>
-        )
-    }
 
     return (
         <Overlay 

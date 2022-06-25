@@ -14,7 +14,7 @@ interface Props {
     children: JSX.Element[] | JSX.Element,
 }
 
-const EpisodeListing = ({ onCloseIconClick, children, isLoading }: Props) => {
+export default ({ onCloseIconClick, children, isLoading }: Props) => {
     return (
         <Overlay>
             <Container>
@@ -32,5 +32,3 @@ const EpisodeListing = ({ onCloseIconClick, children, isLoading }: Props) => {
         </Overlay>
     )
 }
-
-export default EpisodeListing;
