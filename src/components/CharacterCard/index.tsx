@@ -1,17 +1,20 @@
 import React from 'react';
-import { Character, Status } from 'src/types';
+import { Character, Status, UrlString } from 'types';
 import { 
 	Card,
 	Alive,
 	Dead,
-	Description
+	Description,
+	Metadata
 } from './style';
+import ArrowTopRightIcon from 'icons/ArrowTopRightIcon';
 
 interface Props {
-	character: Character
+	character: Character,
+	onEpisodeClick: (episodes: UrlString[]) => void;
 }
 
-const CharacterCard = ({ character }: Props): JSX.Element => {
+const CharacterCard = ({ character, onEpisodeClick }: Props): JSX.Element => {
 	return (
 		<Card>
 			<div>
@@ -33,13 +36,16 @@ const CharacterCard = ({ character }: Props): JSX.Element => {
 					</div>
 				</Description>
 			</div>
-			<div>
+			<Metadata>
 				<h4>Last known location</h4>
-				<p>{ character.location.name }</p>
+				<h3 className="info">{ character.location.name }</h3>
 
 				<h4>No of episode appearances</h4>
-				<p>{ character.episode.length }</p>
-			</div>
+				<h3 className="info">
+					{ character.episode.length }
+					<ArrowTopRightIcon onClick={ () => onEpisodeClick(character.episode) }/>
+				</h3>
+			</Metadata>
 		</Card>
 	)
 }

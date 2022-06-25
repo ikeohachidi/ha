@@ -13,7 +13,7 @@ export enum Gender {
 	FEMALE = 'Female'
 }
 
-type UrlString = string;
+export type UrlString = string;
 
 export interface UrlMeta {
 	name: string,
@@ -42,4 +42,14 @@ export interface Character {
 	location: UrlMeta,
 	image: string,
 	url: UrlString
+}
+
+export interface Episode {
+	id: number,
+	name: string,
+	air_date: string,
+	episode: string,
+	characters: UrlString[],
+	url: string,
+	created: string
 }

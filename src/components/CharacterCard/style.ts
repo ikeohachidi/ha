@@ -33,19 +33,6 @@ export const Card = styled.li`
 	&:hover > div:last-of-type {
 		transform: translateY(0);
 	}
-
-	> div:last-of-type {
-		padding: 10px;
-		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		background-color: rgba(255, 255, 255, 0.8);
-		border: 1px solid #ecf0f1;
-		transform: translateY(100%);
-		transition: .5s;
-	}
 `
 export const Description = styled.div`
 	box-sizing: border-box;
@@ -76,6 +63,32 @@ export const Description = styled.div`
 			align-items: center;
 		}
 	}
+`
+
+export const Metadata = styled.div`
+	padding: 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 0.9);
+	border: 1px solid #ecf0f1;
+	transform: translateY(100%);
+	transition: .5s;
+
+	h4 {
+		color: var(--text-body);
+	}
+
+	h3 {
+		display: flex;
+		align-items: center;
+		i {
+			margin-left: 20px;
+		}
+	}
+}
 `
 
 const Status = `
