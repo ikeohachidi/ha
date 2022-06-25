@@ -1,6 +1,7 @@
 import React from 'react';
-import { useQueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { ApiResponse, Character } from './types';
+import { AppShell, CardsWrapper } from './App.style';
 
 import CharacterCard from './components/CharacterCard';
 
@@ -21,15 +22,15 @@ function App() {
 
   if (isSuccess && data) {
     return (
-      <div className="App">
-        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+      <AppShell>
+        <CardsWrapper>
           {
             data.results.map((character, index) => {
               return <CharacterCard character={character}/>
             })
           }
-        </ul>
-      </div>
+        </CardsWrapper>
+      </AppShell>
     );
   }
 
