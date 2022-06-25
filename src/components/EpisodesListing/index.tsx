@@ -24,7 +24,7 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
     }).join(',');
     EPISODES_API += '/' + episodeIds;
 
-    const { data, isLoading, isError, isSuccess, error } = useQuery('episodes', async (): Promise<Episode[]> => {
+    const { data, isLoading, isError, isSuccess, error } = useQuery('episodes', async (): Promise<Episode[] | Episode> => {
         const response = await fetch(EPISODES_API);
         return response.json();
     })
@@ -44,7 +44,8 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
                     </Action>
                     <Episodes>
                         {
-                            data.map((episode, index) => (
+                            data.constructor === Array
+                            ? data.map((episode, index) => (
                                 <SingleEpisode key={index}>
                                     <p className="episode">{ episode.episode }</p>
                                     <p className="info">
@@ -53,6 +54,13 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
                                     </p>
                                 </SingleEpisode>
                             ))
+                            : <SingleEpisode>
+                                <p className="episode">{ (data as Episode).episode }</p>
+                                <p className="info">
+                                    <span className="name">{ (data as Episode).name }</span>
+                                    <span className="air-date">{ (data as Episode).air_date }</span>
+                                </p>
+                            </SingleEpisode>
                         }
                     </Episodes>
                 </Container>
