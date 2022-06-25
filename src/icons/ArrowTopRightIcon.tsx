@@ -9,7 +9,7 @@ const StyledArrowTopRight = styled.i`
     width: 8px;
     height: 8px;
     border-top: 2px solid;
-    transform: scale(var(--ggs, 1));
+    transform: scale(0.8);
     border-right: 2px solid;
   }
   &::after {

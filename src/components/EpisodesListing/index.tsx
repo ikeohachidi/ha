@@ -2,13 +2,10 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Episode, UrlString } from 'types';
 import { 
-    Container,
-    Overlay,
     SingleEpisode,
-    Action,
-    Episodes
 } from './style';
 
+import Overlay from 'components/Overlay';
 import CloseIcon from 'icons/CloseIcon';
 
 interface Props {
@@ -35,40 +32,31 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
         )
     }
 
-    if (data && !isLoading) {
-        return (
-            <Overlay>
-                <Container>
-                    <Action>
-                        <CloseIcon onClick={ onCloseIconClick }/>
-                    </Action>
-                    <Episodes>
-                        {
-                            data.constructor === Array
-                            ? data.map((episode, index) => (
-                                <SingleEpisode key={index}>
-                                    <p className="episode">{ episode.episode }</p>
-                                    <p className="info">
-                                        <span className="name">{ episode.name }</span>
-                                        <span className="air-date">{ episode.air_date }</span>
-                                    </p>
-                                </SingleEpisode>
-                            ))
-                            : <SingleEpisode>
-                                <p className="episode">{ (data as Episode).episode }</p>
-                                <p className="info">
-                                    <span className="name">{ (data as Episode).name }</span>
-                                    <span className="air-date">{ (data as Episode).air_date }</span>
-                                </p>
-                            </SingleEpisode>
-                        }
-                    </Episodes>
-                </Container>
-            </Overlay>
-        )
-    }
-
-    return <></>
+    return (
+        <Overlay 
+            isLoading={isLoading}
+            onCloseIconClick={onCloseIconClick}
+            children={
+                data?.constructor === Array
+                ? data.map((episode, index) => (
+                    <SingleEpisode key={index}>
+                        <p className="episode">{ episode.episode }</p>
+                        <p className="info">
+                            <span className="name">{ episode.name }</span>
+                            <span className="air-date">{ episode.air_date }</span>
+                        </p>
+                    </SingleEpisode>
+                ))
+                : <SingleEpisode>
+                    <p className="episode">{ (data as Episode).episode }</p>
+                    <p className="info">
+                        <span className="name">{ (data as Episode).name }</span>
+                        <span className="air-date">{ (data as Episode).air_date }</span>
+                    </p>
+                </SingleEpisode>
+            }
+        />
+    )
 }
 
 export default EpisodeListing;
