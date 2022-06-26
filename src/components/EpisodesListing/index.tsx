@@ -6,6 +6,7 @@ import {
 } from './style';
 
 import Overlay from 'components/Overlay';
+import Content from './content';
 
 interface Props {
     episodes: UrlString[],
@@ -20,39 +21,21 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
     }).join(',');
     EPISODES_API += '/' + episodeIds;
 
-    const { data, isLoading, isError, error } = useQuery('episodes', async (): Promise<Episode[] | Episode> => {
+    const { data, isLoading, isError } = useQuery('episodes', async (): Promise<Episode[] | Episode> => {
         const response = await fetch(EPISODES_API);
+        if (!response.ok) {
+            throw new Error();
+        }
         return response.json();
     })
 
-    const Content = () => {
-        if (data) {
-            if (data.constructor === Array) {
-                return data.map((episode, index) => (
-                    <SingleEpisode key={index}>
-                        <p className="episode">{ episode.episode }</p>
-                        <p className="info">
-                            <span className="name">{ episode.name }</span>
-                            <span className="air-date">{ episode.air_date }</span>
-                        </p>
-                    </SingleEpisode>
-                ))
-            } else {
-                return <SingleEpisode>
-                <p className="episode">{ (data as Episode).episode }</p>
-                <p className="info">
-                    <span className="name">{ (data as Episode).name }</span>
-                    <span className="air-date">{ (data as Episode).air_date }</span>
-                </p>
-            </SingleEpisode>
-            }
-        }
-        return <p></p>
-    }
-
     return (
         <Overlay isLoading={isLoading} onCloseIconClick={onCloseIconClick}>
-            { Content() }
+            {
+                isError
+                ? <h4>Error retrieving episodes</h4>
+                : <Content data={data}/>
+            }
         </Overlay>
     )
 }
