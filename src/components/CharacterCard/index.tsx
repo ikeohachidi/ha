@@ -19,12 +19,12 @@ const CharacterCard = ({ character, onOriginClick, onEpisodeClick }: Props): JSX
 	return (
 		<Card>
 			<div>
-				<img src={character.image} alt={character.name}/>
+				<img data-testid="image" src={character.image} alt={character.name}/>
 
 				<Description>
-					<h2>{ character.name }</h2>
+					<h2 data-testid="name">{ character.name }</h2>
 					<div className="quick-info">
-						<p>{ character.species }</p>
+						<p data-testid="species">{ character.species }</p>
 						<div>
 							{
 								character.status === Status.ALIVE
@@ -38,7 +38,7 @@ const CharacterCard = ({ character, onOriginClick, onEpisodeClick }: Props): JSX
 			</div>
 			<Metadata>
 				<h3>Origin</h3>
-				<h4 className="info">
+				<h4 className="info" data-testid="origin">
 					{ character.origin.name }
 					{
 						character.origin.url &&
@@ -47,10 +47,10 @@ const CharacterCard = ({ character, onOriginClick, onEpisodeClick }: Props): JSX
 				</h4>
 			
 				<h3>Last known location</h3>
-				<h4 className="info">{ character.location.name }</h4>
+				<h4 className="info" data-testid="location-name">{ character.location.name }</h4>
 
 				<h3>No of episode appearances</h3>
-				<h4 className="info">
+				<h4 className="info" data-testid="episode">
 					{ character.episode.length }
 					<ArrowTopRightIcon onClick={ () => onEpisodeClick(character.episode) }/>
 				</h4>
