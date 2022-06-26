@@ -9,7 +9,13 @@ import OriginListing from 'components/OriginListing';
 import Spinner from 'components/Spinner';
 
 function App() {
-  const CHARACTER_API = 'https://rickandmortyapi.com/api/character';
+  const route = window.location.pathname.split('/')
+  const page = route[1] ? route[1] : '';
+
+  let CHARACTER_API = 'https://rickandmortyapi.com/api/character';
+  if (page) {
+    CHARACTER_API += `/?page=${page}`;
+  }
   const { data, isLoading, isError, error, isSuccess } = useQuery('characters', async (): Promise<ApiResponse<Character[]>> => {
     const response = await fetch(CHARACTER_API);
     return response.json();
