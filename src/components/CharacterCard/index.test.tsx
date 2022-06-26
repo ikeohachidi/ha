@@ -1,6 +1,5 @@
 import { render } from "@testing-library/react";
 import { Character, Species, Status, Gender } from "types";
-import { CompletionTriggerKind } from "typescript";
 import CharacterCard from ".";
 
 const character: Character = {
@@ -29,7 +28,7 @@ const factory = () => render(
     />
 )
 
-describe('Content', () => {
+describe('CharacterCard', () => {
     it('should render content', () => {
         const component = factory();
 
