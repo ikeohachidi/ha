@@ -40,4 +40,5 @@ export const List = styled.ul`
 	flex-grow: 2;
 	margin: 0;
 	list-style: none;
+	position: relative;
 `

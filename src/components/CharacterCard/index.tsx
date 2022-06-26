@@ -40,7 +40,10 @@ const CharacterCard = ({ character, onOriginClick, onEpisodeClick }: Props): JSX
 				<h3>Origin</h3>
 				<h4 className="info">
 					{ character.origin.name }
-					<ArrowTopRightIcon onClick={ () => onOriginClick(character.origin.url) }/>
+					{
+						character.origin.url &&
+						<ArrowTopRightIcon onClick={ () => onOriginClick(character.origin.url) }/>
+					}
 				</h4>
 			
 				<h3>Last known location</h3>

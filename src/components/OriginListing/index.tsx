@@ -11,17 +11,15 @@ interface Props {
 }
 
 const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
-    const { data, isLoading, isError, isSuccess, error } = useQuery('location', async (): Promise<Location> => {
+    const { data, isLoading, isError } = useQuery('location', async (): Promise<Location> => {
         const response = await fetch(locationUrl);
         return response.json();
     })
 
     return (
-        <Overlay 
-            isLoading={isLoading}
-            onCloseIconClick={onCloseIconClick}
-            children={
-                data !== undefined
+        <Overlay isLoading={isLoading} onCloseIconClick={onCloseIconClick}>
+            {
+                !isError && data
                 ? <li>
                     <h4>Origin information</h4>
                     <Info>
@@ -41,9 +39,9 @@ const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
                         <span>{ data.residents.length }</span>
                     </Info>
                 </li>
-                :<div></div>
+                : <p></p>
             }
-        />
+        </Overlay>
     )
 }
 

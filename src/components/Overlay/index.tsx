@@ -7,6 +7,7 @@ import {
 } from './style';
 
 import CloseIcon from 'icons/CloseIcon';
+import Spinner from 'components/Spinner';
 
 interface Props {
     onCloseIconClick: () => void,
@@ -14,7 +15,7 @@ interface Props {
     children: JSX.Element[] | JSX.Element,
 }
 
-export default ({ onCloseIconClick, children, isLoading }: Props) => {
+const Component = ({ onCloseIconClick, children, isLoading }: Props) => {
     return (
         <Overlay>
             <Container>
@@ -24,7 +25,7 @@ export default ({ onCloseIconClick, children, isLoading }: Props) => {
                 <List>
                     {
                         isLoading 
-                        ? <p>Patience</p>
+                        ? <Spinner/>
                         : children 
                     }
                 </List>
@@ -32,3 +33,5 @@ export default ({ onCloseIconClick, children, isLoading }: Props) => {
         </Overlay>
     )
 }
+
+export default Component
