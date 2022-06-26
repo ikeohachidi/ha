@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Episode, UrlString } from 'types';
 
 import Overlay from 'components/Overlay';
-import Content from './content';
+import Content from './Content';
 
 interface Props {
     episodes: UrlString[],
