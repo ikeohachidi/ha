@@ -6,12 +6,15 @@ import { AppShell, CardsWrapper } from './App.style';
 import CharacterCard from 'components/CharacterCard';
 import EpisodesListing from 'components/EpisodesListing';
 import OriginListing from 'components/OriginListing';
+import Spinner from 'components/Spinner';
 
 function App() {
   const CHARACTER_API = 'https://rickandmortyapi.com/api/character';
   const { data, isLoading, isError, error, isSuccess } = useQuery('characters', async (): Promise<ApiResponse<Character[]>> => {
     const response = await fetch(CHARACTER_API);
     return response.json();
+  }, {
+    staleTime: 60 * (60 * 1000)
   })
 
   const [ showEpisodes, setShowEpisodes ] = useState(false);
@@ -30,7 +33,7 @@ function App() {
   }
 
   if (isLoading) {
-    return <p>Loading page please wait.</p>
+    return <Spinner/> 
   }
 
   if (isError && error) {
