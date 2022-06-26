@@ -18,9 +18,13 @@ function App() {
   }
   const { data, isLoading, isError, error, isSuccess } = useQuery('characters', async (): Promise<ApiResponse<Character[]>> => {
     const response = await fetch(CHARACTER_API);
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+
     return response.json();
   }, {
-    staleTime: 60 * (60 * 1000)
+    staleTime: 60 * (60 * 1000),
   })
 
   const [ showEpisodes, setShowEpisodes ] = useState(false);
@@ -43,7 +47,7 @@ function App() {
   }
 
   if (isError && error) {
-    return <div>it seems an error occured</div>
+    return <div>{error as string}</div>
   }
 
   if (isSuccess && data) {

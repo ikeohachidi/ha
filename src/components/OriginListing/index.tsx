@@ -13,13 +13,16 @@ interface Props {
 const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
     const { data, isLoading, isError } = useQuery('location', async (): Promise<Location> => {
         const response = await fetch(locationUrl);
+        if (!response.ok) {
+            throw new Error();
+        }
         return response.json();
     })
 
     return (
         <Overlay isLoading={isLoading} onCloseIconClick={onCloseIconClick}>
             {
-                !isError && data
+                (!isError && data)
                 ? <li>
                     <h4>Origin information</h4>
                     <Info>
@@ -39,7 +42,7 @@ const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
                         <span>{ data.residents.length }</span>
                     </Info>
                 </li>
-                : <p></p>
+                : <h4>Sorry couldn't retrieve origin information, try again later.</h4>
             }
         </Overlay>
     )
