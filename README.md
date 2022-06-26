@@ -11,7 +11,7 @@ Then run `npm run start` to run the application. This should open `localhost:300
 - css.gg for CSS icons.
 
 ## Testing
-Most of the components built for this project have tests
+Most of the components built for this project have tests and all available tests can be run with `npm run test`
 ## Scope covered
 On opening the page at the root path `/` for the first time the page loads characters from the "rick and morty" api.
 Using `react-query` this result is cached for **1 hour**.
