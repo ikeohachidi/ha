@@ -11,6 +11,7 @@ const StyledArrowTopRight = styled.i`
     border-top: 2px solid;
     transform: scale(0.8);
     border-right: 2px solid;
+    cursor: pointer;
   }
   &::after {
     content: '';

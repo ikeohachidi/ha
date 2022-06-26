@@ -11,6 +11,7 @@ const StyledClose = styled.i`
     height: 22px;
     border: 2px solid transparent;
     border-radius: 40px;
+    cursor: pointer;
   }
   &::after,
   &::before {
