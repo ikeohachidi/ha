@@ -1,9 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Episode, UrlString } from 'types';
-import { 
-    SingleEpisode,
-} from './style';
 
 import Overlay from 'components/Overlay';
 import Content from './content';
@@ -21,7 +18,7 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
     }).join(',');
     EPISODES_API += '/' + episodeIds;
 
-    const { data, isLoading, isError } = useQuery('episodes', async (): Promise<Episode[] | Episode> => {
+    const { data, isFetching, isError } = useQuery('episodes', async (): Promise<Episode[] | Episode> => {
         const response = await fetch(EPISODES_API);
         if (!response.ok) {
             throw new Error();
@@ -30,7 +27,7 @@ const EpisodeListing = ({ episodes, onCloseIconClick }: Props) => {
     })
 
     return (
-        <Overlay isLoading={isLoading} onCloseIconClick={onCloseIconClick}>
+        <Overlay isLoading={isFetching} onCloseIconClick={onCloseIconClick}>
             {
                 isError
                 ? <h4>Error retrieving episodes</h4>

@@ -11,7 +11,7 @@ interface Props {
 }
 
 const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
-    const { data, isLoading, isError } = useQuery('location', async (): Promise<Location> => {
+    const { data, isFetching, isError } = useQuery('location', async (): Promise<Location> => {
         const response = await fetch(locationUrl);
         if (!response.ok) {
             throw new Error();
@@ -20,7 +20,7 @@ const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
     })
 
     return (
-        <Overlay isLoading={isLoading} onCloseIconClick={onCloseIconClick}>
+        <Overlay isLoading={isFetching} onCloseIconClick={onCloseIconClick}>
             {
                 (!isError && data)
                 ? <li>
