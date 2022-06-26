@@ -25,19 +25,19 @@ const OriginListing = ({ locationUrl, onCloseIconClick }: Props) => {
                 (!isError && data)
                 ? <li>
                     <h4>Origin information</h4>
-                    <Info>
+                    <Info data-testid="name">
                         <span>Name: </span>
                         <span>{ data.name }</span>
                     </Info>
-                    <Info>
+                    <Info data-testid="type">
                         <span>Type:</span>
                         <span>{ data.type }</span>
                     </Info>
-                    <Info>
+                    <Info data-testid="dimension">
                         <span>Dimension:</span>
                         <span>{ data.dimension }</span>
                     </Info>
-                    <Info>
+                    <Info data-testid="residents">
                         <span>No. of residents:</span>
                         <span>{ data.residents.length }</span>
                     </Info>
